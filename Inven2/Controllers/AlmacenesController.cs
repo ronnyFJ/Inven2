@@ -38,7 +38,7 @@ namespace Inven2.Controllers
         // GET: Almacenes/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Almacenes());
         }
 
         // POST: Almacenes/Create

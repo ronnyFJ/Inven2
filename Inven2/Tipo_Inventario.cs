@@ -11,8 +11,7 @@ namespace Inven2
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Tipo_Inventario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,16 +21,12 @@ namespace Inven2
         }
     
         public int Id_Tipo_inv { get; set; }
-        [Required]
         public string Descripcion { get; set; }
-        [Required]
         public Nullable<int> Cuenta_contable { get; set; }
-        [Required]
         public Nullable<bool> Estado { get; set; }
-        [Required]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Articulos> Articulos { get; set; }
-        [Required]
         public virtual Tipo_Cuenta Tipo_Cuenta { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="INVENTARIODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="INVENTARIODBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Almacenes">
           <Key>
             <PropertyRef Name="IdAlmacenes" />
@@ -23,6 +23,7 @@
           <Property Name="Id_Tipo_Inve" Type="int" />
           <Property Name="Costo_unitario" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Estado" Type="bit" />
+          <Property Name="Id_Asiento_cont" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -89,8 +90,7 @@
             <End Role="Tipo_Inventario" EntitySet="Tipo_Inventario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="INVENTARIODBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -113,6 +113,7 @@
           <Property Name="Costo_unitario" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Estado" Type="Boolean" />
           <NavigationProperty Name="Tipo_Inventario" Relationship="Self.FK_Articulos_Tipo_Inventario" FromRole="Articulos" ToRole="Tipo_Inventario" />
+          <Property Name="Id_Asiento_cont" Type="Int32" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -200,6 +201,7 @@
           <EntitySetMapping Name="Articulos">
             <EntityTypeMapping TypeName="INVENTARIODBModel.Articulos">
               <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="Id_Asiento_cont" ColumnName="Id_Asiento_cont" />
                 <ScalarProperty Name="IdArticulos" ColumnName="IdArticulos" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Existencia" ColumnName="Existencia" />

@@ -18,6 +18,7 @@
     <Property Name="Id_Tipo_Inve" Type="int" />
     <Property Name="Costo_unitario" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Estado" Type="bit" />
+    <Property Name="Id_Asiento_cont" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

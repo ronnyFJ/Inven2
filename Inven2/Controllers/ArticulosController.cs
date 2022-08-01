@@ -39,8 +39,9 @@ namespace Inven2.Controllers
         // GET: Articulos/Create
         public ActionResult Create()
         {
-            ViewBag.Id_Tipo_Inve = new SelectList(db.Tipo_Inventario, "Id_Tipo_inv", "Descripcion");
-            return View();
+            ViewBag.Id_Tipo_Inve = new SelectList(db.Tipo_Inventario.Where(i => i.Estado == true), 
+                "Id_Tipo_inv", "Descripcion");
+            return View(new Articulos());
         }
 
         // POST: Articulos/Create

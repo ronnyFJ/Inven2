@@ -40,7 +40,7 @@ namespace Inven2.Controllers
         public ActionResult Create()
         {
             ViewBag.Cuenta_contable = new SelectList(db.Tipo_Cuenta, "Id_TipoCuenta", "Tipo_cuenta1");
-            return View();
+            return View(new Tipo_Inventario());
         }
 
         // POST: Tipo_Inventario/Create

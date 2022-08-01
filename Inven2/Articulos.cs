@@ -11,24 +11,17 @@ namespace Inven2
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Articulos
     {
         public int IdArticulos { get; set; }
-        [Required]
         public string Descripcion { get; set; }
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Debe ser mayor que cero")]
         public Nullable<int> Existencia { get; set; }
-        [Required]
         public Nullable<int> Id_Tipo_Inve { get; set; }
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Debe ser mayor que cero")]
         public Nullable<decimal> Costo_unitario { get; set; }
-        [Required]
         public Nullable<bool> Estado { get; set; }
-        [Required]
+        public Nullable<int> Id_Asiento_cont { get; set; }
+    
         public virtual Tipo_Inventario Tipo_Inventario { get; set; }
     }
 }

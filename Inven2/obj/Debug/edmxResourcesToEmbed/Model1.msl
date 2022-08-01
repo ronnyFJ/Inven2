@@ -13,6 +13,7 @@
     <EntitySetMapping Name="Articulos">
       <EntityTypeMapping TypeName="INVENTARIODBModel.Articulos">
         <MappingFragment StoreEntitySet="Articulos">
+          <ScalarProperty Name="Id_Asiento_cont" ColumnName="Id_Asiento_cont" />
           <ScalarProperty Name="IdArticulos" ColumnName="IdArticulos" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Existencia" ColumnName="Existencia" />

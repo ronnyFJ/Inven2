@@ -79,7 +79,6 @@ C:\Users\ronny\source\repos\Inven2\Inven2\bin\es\System.Web.Razor.resources.dll
 C:\Users\ronny\source\repos\Inven2\Inven2\bin\es\System.Web.WebPages.resources.dll
 C:\Users\ronny\source\repos\Inven2\Inven2\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\ronny\source\repos\Inven2\Inven2\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\ronny\source\repos\Inven2\Inven2\obj\Debug\Inven2.csproj.AssemblyReference.cache
 C:\Users\ronny\source\repos\Inven2\Inven2\obj\Debug\Inven2.csproj.CoreCompileInputs.cache
 C:\Users\ronny\source\repos\Inven2\Inven2\obj\Debug\Inven2.csproj.CopyComplete
 C:\Users\ronny\source\repos\Inven2\Inven2\obj\Debug\Inven2.dll
@@ -88,3 +87,4 @@ C:\Users\ronny\source\repos\Inven2\Inven2\bin\EntityFramework.dll
 C:\Users\ronny\source\repos\Inven2\Inven2\bin\EntityFramework.SqlServer.dll
 C:\Users\ronny\source\repos\Inven2\Inven2\bin\EntityFramework.xml
 C:\Users\ronny\source\repos\Inven2\Inven2\bin\EntityFramework.SqlServer.xml
+C:\Users\ronny\source\repos\Inven2\Inven2\obj\Debug\Inven2.csproj.AssemblyReference.cache

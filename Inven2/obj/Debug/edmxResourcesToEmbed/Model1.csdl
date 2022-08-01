@@ -19,6 +19,7 @@
     <Property Name="Costo_unitario" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Estado" Type="Boolean" />
     <NavigationProperty Name="Tipo_Inventario" Relationship="Self.FK_Articulos_Tipo_Inventario" FromRole="Articulos" ToRole="Tipo_Inventario" />
+    <Property Name="Id_Asiento_cont" Type="Int32" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

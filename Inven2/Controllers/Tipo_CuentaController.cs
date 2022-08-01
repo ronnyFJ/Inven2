@@ -38,7 +38,7 @@ namespace Inven2.Controllers
         // GET: Tipo_Cuenta/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Tipo_Cuenta());
         }
 
         // POST: Tipo_Cuenta/Create
