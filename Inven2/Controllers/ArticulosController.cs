@@ -4,15 +4,22 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Inven2;
+using Inven2.Models;
+using Newtonsoft.Json;
 
 namespace Inven2.Controllers
 {
     public class ArticulosController : Controller
     {
         private INVENTARIODBEntities db = new INVENTARIODBEntities();
+        private readonly HttpClient _httpClient = new HttpClient();
 
         // GET: Articulos
         public ActionResult Index()
@@ -49,8 +56,13 @@ namespace Inven2.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdArticulos,Descripcion,Existencia,Id_Tipo_Inve,Costo_unitario,Estado")] Articulos articulos)
+        public async Task<ActionResult> Create([Bind(Include = "IdArticulos,Descripcion,Existencia,Id_Tipo_Inve,Costo_unitario,Estado")] Articulos articulos)
         {
+            //llamar a contabilidad
+            var response = await registrarAsiento(articulos);
+
+            //articulos.Id_Asiento_cont = response["id"];
+
             if (ModelState.IsValid)
             {
                 db.Articulos.Add(articulos);
@@ -60,6 +72,52 @@ namespace Inven2.Controllers
 
             ViewBag.Id_Tipo_Inve = new SelectList(db.Tipo_Inventario, "Id_Tipo_inv", "Descripcion", articulos.Id_Tipo_Inve);
             return View(articulos);
+        }
+
+        public async Task<HttpResponseMessage> registrarAsiento(Articulos articulos)
+        {
+            var content = new List<AccountingEntry>();
+
+            var accountingEntry = new AccountingEntry() 
+            {
+                period = "2022-08",
+                currency = "DOP",
+            };
+
+            var details = new List<AccountingEntryDetail>();
+
+            //Adding DB Account
+            details.Add(new AccountingEntryDetail()
+            { 
+                amount = articulos.Costo_unitario.Value,
+                legerAccount = 6,
+                movementType = "DB"
+            });
+
+
+            //Adding CR Account
+            details.Add(new AccountingEntryDetail()
+            {
+                amount = articulos.Costo_unitario.Value,
+                legerAccount = 23,
+                movementType = "CR"
+            });
+
+            accountingEntry.detail = details;
+
+            content.Add(accountingEntry);
+
+            //call rest api
+            var json = JsonConvert.SerializeObject(content);
+
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Add("Token", "invent006");
+            var response = await _httpClient.PostAsync("https://service-accounting.herokuapp.com/api/AccountingEntry",
+                stringContent);
+
+            return response;
         }
 
         // GET: Articulos/Edit/5
