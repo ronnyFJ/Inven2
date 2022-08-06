@@ -62,7 +62,11 @@ namespace Inven2.Controllers
             var response = await registrarAsiento(articulos);
 
             //articulos.Id_Asiento_cont = response["id"];
-            
+            var jsonString = await response.Content.ReadAsStringAsync();
+            var accountabilityResponse = JsonConvert.DeserializeObject<AccountabilityResponse>(jsonString);
+
+            articulos.Id_Asiento_cont = accountabilityResponse.responseList.ElementAt(0).id;
+
 
             if (ModelState.IsValid)
             {

@@ -157,6 +157,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountabilityResponse.cs" />
+    <Compile Include="Models\AccountabilityResponseDetail.cs" />
     <Compile Include="Models\AccountingEntry.cs" />
     <Compile Include="Models\AccountingEntryDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,6 +7,6 @@ namespace Inven2.Models
 {
     public class AccountabilityResponse
     {
-
+        public IEnumerable<AccountabilityResponseDetail> responseList { get; set; }
     }
 }
