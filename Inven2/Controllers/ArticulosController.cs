@@ -62,6 +62,7 @@ namespace Inven2.Controllers
             var response = await registrarAsiento(articulos);
 
             //articulos.Id_Asiento_cont = response["id"];
+            
 
             if (ModelState.IsValid)
             {
