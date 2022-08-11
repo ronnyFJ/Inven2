@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="INVENTARIODBEntities-Web.config Connection String" description="INVENTARIODBEntities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;Server=tcp:inventariodbopensource.database.windows.net,1433;Initial Catalog=INVENTARIODB;Persist Security Info=False;User ID=ronnyinventariodb;Password=OpenInventario1*;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ronny\\source\\repos\\Inven2\\Inven2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='INVENTARIODBEntities']/@connectionString" />
+  </parameter>
+</parameters>

@@ -25,6 +25,19 @@
           <Property Name="Estado" Type="bit" />
           <Property Name="Id_Asiento_cont" Type="int" />
         </EntityType>
+        <EntityType Name="Asientos">
+          <Key>
+            <PropertyRef Name="IdAsientoCont" />
+          </Key>
+          <Property Name="IdAsientoCont" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripción" Type="varchar" MaxLength="50" />
+          <Property Name="Id_tipoIvent" Type="int" />
+          <Property Name="Cuenta_contable" Type="varchar" MaxLength="50" />
+          <Property Name="Id_tipo_cuenta" Type="int" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Monto" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Estado" Type="bit" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -63,6 +76,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Asientos_Tipo_Cuenta">
+          <End Role="Tipo_Cuenta" Type="Self.Tipo_Cuenta" Multiplicity="0..1" />
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Cuenta">
+              <PropertyRef Name="Id_TipoCuenta" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_tipo_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asientos_Tipo_Inventario">
+          <End Role="Tipo_Inventario" Type="Self.Tipo_Inventario" Multiplicity="0..1" />
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Inventario">
+              <PropertyRef Name="Id_Tipo_inv" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_tipoIvent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tipo_Inventario_Tipo_Cuenta">
           <End Role="Tipo_Cuenta" Type="Self.Tipo_Cuenta" Multiplicity="0..1" />
           <End Role="Tipo_Inventario" Type="Self.Tipo_Inventario" Multiplicity="*" />
@@ -78,12 +115,21 @@
         <EntityContainer Name="INVENTARIODBModelStoreContainer">
           <EntitySet Name="Almacenes" EntityType="Self.Almacenes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asientos" EntityType="Self.Asientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tipo_Cuenta" EntityType="Self.Tipo_Cuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tipo_Inventario" EntityType="Self.Tipo_Inventario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Articulos_Tipo_Inventario" Association="Self.FK_Articulos_Tipo_Inventario">
             <End Role="Tipo_Inventario" EntitySet="Tipo_Inventario" />
             <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asientos_Tipo_Cuenta" Association="Self.FK_Asientos_Tipo_Cuenta">
+            <End Role="Tipo_Cuenta" EntitySet="Tipo_Cuenta" />
+            <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asientos_Tipo_Inventario" Association="Self.FK_Asientos_Tipo_Inventario">
+            <End Role="Tipo_Inventario" EntitySet="Tipo_Inventario" />
+            <End Role="Asientos" EntitySet="Asientos" />
           </AssociationSet>
           <AssociationSet Name="FK_Tipo_Inventario_Tipo_Cuenta" Association="Self.FK_Tipo_Inventario_Tipo_Cuenta">
             <End Role="Tipo_Cuenta" EntitySet="Tipo_Cuenta" />
@@ -132,6 +178,7 @@
           <Property Name="Id_TipoCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Tipo_cuenta1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tipo_Inventario" Relationship="Self.FK_Tipo_Inventario_Tipo_Cuenta" FromRole="Tipo_Cuenta" ToRole="Tipo_Inventario" />
+          <NavigationProperty Name="Asientos" Relationship="INVENTARIODBModel.FK_Asientos_Tipo_Cuenta" FromRole="Tipo_Cuenta" ToRole="Asientos" />
         </EntityType>
         <EntityType Name="Tipo_Inventario">
           <Key>
@@ -143,6 +190,7 @@
           <Property Name="Estado" Type="Boolean" />
           <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Tipo_Inventario" FromRole="Tipo_Inventario" ToRole="Articulos" />
           <NavigationProperty Name="Tipo_Cuenta" Relationship="Self.FK_Tipo_Inventario_Tipo_Cuenta" FromRole="Tipo_Inventario" ToRole="Tipo_Cuenta" />
+          <NavigationProperty Name="Asientos" Relationship="INVENTARIODBModel.FK_Asientos_Tipo_Inventario" FromRole="Tipo_Inventario" ToRole="Asientos" />
         </EntityType>
         <Association Name="FK_Articulos_Tipo_Inventario">
           <End Role="Tipo_Inventario" Type="Self.Tipo_Inventario" Multiplicity="0..1" />
@@ -182,7 +230,55 @@
             <End Role="Tipo_Cuenta" EntitySet="Tipo_Cuenta" />
             <End Role="Tipo_Inventario" EntitySet="Tipo_Inventario" />
           </AssociationSet>
+          <EntitySet Name="Asientos" EntityType="INVENTARIODBModel.Asientos" />
+          <AssociationSet Name="FK_Asientos_Tipo_Cuenta" Association="INVENTARIODBModel.FK_Asientos_Tipo_Cuenta">
+            <End Role="Tipo_Cuenta" EntitySet="Tipo_Cuenta" />
+            <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asientos_Tipo_Inventario" Association="INVENTARIODBModel.FK_Asientos_Tipo_Inventario">
+            <End Role="Tipo_Inventario" EntitySet="Tipo_Inventario" />
+            <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Asientos">
+          <Key>
+            <PropertyRef Name="IdAsientoCont" />
+          </Key>
+          <Property Name="IdAsientoCont" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripción" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_tipoIvent" Type="Int32" />
+          <Property Name="Cuenta_contable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_tipo_cuenta" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Monto" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Tipo_Cuenta" Relationship="INVENTARIODBModel.FK_Asientos_Tipo_Cuenta" FromRole="Asientos" ToRole="Tipo_Cuenta" />
+          <NavigationProperty Name="Tipo_Inventario" Relationship="INVENTARIODBModel.FK_Asientos_Tipo_Inventario" FromRole="Asientos" ToRole="Tipo_Inventario" />
+        </EntityType>
+        <Association Name="FK_Asientos_Tipo_Cuenta">
+          <End Type="INVENTARIODBModel.Tipo_Cuenta" Role="Tipo_Cuenta" Multiplicity="0..1" />
+          <End Type="INVENTARIODBModel.Asientos" Role="Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Cuenta">
+              <PropertyRef Name="Id_TipoCuenta" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_tipo_cuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asientos_Tipo_Inventario">
+          <End Type="INVENTARIODBModel.Tipo_Inventario" Role="Tipo_Inventario" Multiplicity="0..1" />
+          <End Type="INVENTARIODBModel.Asientos" Role="Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Inventario">
+              <PropertyRef Name="Id_Tipo_inv" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_tipoIvent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -237,6 +333,20 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Cuenta_contable" ColumnName="Cuenta_contable" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asientos">
+            <EntityTypeMapping TypeName="INVENTARIODBModel.Asientos">
+              <MappingFragment StoreEntitySet="Asientos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id_tipo_cuenta" ColumnName="Id_tipo_cuenta" />
+                <ScalarProperty Name="Cuenta_contable" ColumnName="Cuenta_contable" />
+                <ScalarProperty Name="Id_tipoIvent" ColumnName="Id_tipoIvent" />
+                <ScalarProperty Name="Descripción" ColumnName="Descripción" />
+                <ScalarProperty Name="IdAsientoCont" ColumnName="IdAsientoCont" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

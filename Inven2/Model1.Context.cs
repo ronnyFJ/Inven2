@@ -30,5 +30,6 @@ namespace Inven2
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tipo_Cuenta> Tipo_Cuenta { get; set; }
         public virtual DbSet<Tipo_Inventario> Tipo_Inventario { get; set; }
+        public virtual DbSet<Asientos> Asientos { get; set; }
     }
 }

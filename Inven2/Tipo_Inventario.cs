@@ -18,6 +18,7 @@ namespace Inven2
         public Tipo_Inventario()
         {
             this.Articulos = new HashSet<Articulos>();
+            this.Asientos = new HashSet<Asientos>();
         }
     
         public int Id_Tipo_inv { get; set; }
@@ -28,5 +29,7 @@ namespace Inven2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Articulos> Articulos { get; set; }
         public virtual Tipo_Cuenta Tipo_Cuenta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Asientos> Asientos { get; set; }
     }
 }

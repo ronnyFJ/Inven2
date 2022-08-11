@@ -134,8 +134,12 @@
     <Compile Include="Articulos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Asientos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AlmacenesController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\AsientosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Tipo_CuentaController.cs" />
     <Compile Include="Controllers\Tipo_InventarioController.cs" />
@@ -200,6 +204,7 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\inventario-frontend - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -245,6 +250,11 @@
     <Content Include="Views\Tipo_Inventario\Details.cshtml" />
     <Content Include="Views\Tipo_Inventario\Edit.cshtml" />
     <Content Include="Views\Tipo_Inventario\Index.cshtml" />
+    <Content Include="Views\Asientos\Create.cshtml" />
+    <Content Include="Views\Asientos\Delete.cshtml" />
+    <Content Include="Views\Asientos\Details.cshtml" />
+    <Content Include="Views\Asientos\Edit.cshtml" />
+    <Content Include="Views\Asientos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

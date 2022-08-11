@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Inven2.Articulos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary active" })
+</p>
+<table class="table table-condensed table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Existencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Costo_unitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo_Inventario.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Asiento_cont)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Existencia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Costo_unitario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Estado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tipo_Inventario.Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id_Asiento_cont)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.IdArticulos }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Details", "Details", new { id = item.IdArticulos }, new { @class = "btn btn-success" }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.IdArticulos }, new { @class = "btn btn-danger", onclick = "return confirm('Seguro de eliminar?');" })
+    </td>
+</tr>
+    }
+
+</table>
